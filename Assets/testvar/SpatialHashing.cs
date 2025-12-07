@@ -18,7 +18,7 @@ public class SpatialHashQuads
     public class QuadData
     {
         public Vector3 center;
-        public int v0, v1, v2, v3;
+        public List<int> indices;
     }
 
     private Vector3Int PositionToCell(Vector3 pos)
@@ -33,7 +33,7 @@ public class SpatialHashQuads
     /// <summary>
     /// Add a new quad to the hash
     /// </summary>
-    public void AddQuad(Vector3 center, int v0, int v1, int v2, int v3)
+    public void AddQuad(Vector3 center, int v0, int v1, int v2, int v3, int v4)
     {
         Vector3Int cell = PositionToCell(center);
         if (!hash.TryGetValue(cell, out var list))
@@ -42,14 +42,10 @@ public class SpatialHashQuads
             hash[cell] = list;
         }
 
-        list.Add(new QuadData
-        {
-            center = center,
-            v0 = v0,
-            v1 = v1,
-            v2 = v2,
-            v3 = v3
-        });
+        QuadData qd = new();
+        qd.center = center;
+        qd.indices = new List<int> { v0, v1, v2, v3, v4 };
+        list.Add(qd);
     }
 
     /// <summary>

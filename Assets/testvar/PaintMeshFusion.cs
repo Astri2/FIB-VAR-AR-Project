@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
@@ -12,6 +13,8 @@ public class PaintMeshFusion : MonoBehaviour
 
     private SpatialHashQuads spatialHash;
     public float spatialHashCellSize = 0.1f;
+
+    public bool replaceColors = true;
 
     public void Awake()
     {
@@ -27,26 +30,34 @@ public class PaintMeshFusion : MonoBehaviour
     /// </summary>
     public bool Paint(Vector3 position, Vector3 normal, Color color, float size, bool erase = false)
     {
+        List<SpatialHashQuads.QuadData> nearby = spatialHash.GetNearbyQuads(position, size);
         float mergeSize = size / 2f;
-        List<SpatialHashQuads.QuadData> nearby = spatialHash.GetNearbyQuads(position, mergeSize);
         
         bool needANewQuad = true;
+        bool changedAColor = false;
         foreach (SpatialHashQuads.QuadData quad in nearby)
         {      
-            if (Utils.MaxDistance(quad.center, position) <= mergeSize)
-            {
-                needANewQuad = false;
-            }
-        }
+            // the point you're facing has paint already
+            if (Utils.MaxDistance(quad.center, position) <= mergeSize) { needANewQuad = false; }
 
-        // go through all vertices
-        bool changedAColor = false;
-        for(int i = 0; i < vertices.Count; i++)
-        {
-            
-            if (Utils.MaxDistance(vertices[i], position) < size / 2.0f)
+            foreach (int verticeIndice in quad.indices)
             {
-                colors[i] = color;
+                // too far
+                if (Utils.ManhattanDistance(vertices[verticeIndice], position) > size / 2.0f) continue;
+                
+                // same color
+                if (colors[verticeIndice] == color) continue;
+                
+                // update vertex color
+                if(replaceColors) colors[verticeIndice] = color;
+                else
+                {
+                    if (erase) {
+                        Color c = colors[verticeIndice];
+                        colors[verticeIndice] = new Color(c.r, c.g, c.b, 2f * c.a / 3f);
+                    } 
+                    else colors[verticeIndice] = (2*colors[verticeIndice] +  color) / 3f;
+                }
                 changedAColor = true;
             }
         }
@@ -56,16 +67,15 @@ public class PaintMeshFusion : MonoBehaviour
         {
             Debug.Log("Added a quad");
             AddQuad(position, normal, color, size);
-            return true;
-        }
-
-        if (changedAColor)
+        } else if(changedAColor)
         {
-            Debug.Log("Changed a color");
+            // if we placed e quad, the colors are already updated
             paintMesh.SetColors(colors);
         }
 
-        return false;
+        if(changedAColor) Debug.Log("Changed a color");
+
+        return true; // unused for now
     }
 
     public bool Erase(Vector3 position, Vector3 normal, float size)
@@ -89,20 +99,23 @@ public class PaintMeshFusion : MonoBehaviour
         Vector3 v1 = offSetPosition + (tangent * half) - (bitangent * half);
         Vector3 v2 = offSetPosition - (tangent * half) - (bitangent * half);
         Vector3 v3 = offSetPosition - (tangent * half) + (bitangent * half);
+        Vector3 v4 = offSetPosition;
 
         int index = vertices.Count;
         vertices.Add(v0); colors.Add(color);
         vertices.Add(v1); colors.Add(color);
         vertices.Add(v2); colors.Add(color);
         vertices.Add(v3); colors.Add(color);
+        vertices.Add(v4); colors.Add(color);
 
         // Two triangles
-        triangles.Add(index + 0); triangles.Add(index + 1); triangles.Add(index + 2);
-        triangles.Add(index + 2); triangles.Add(index + 3); triangles.Add(index + 0);
+        triangles.Add(index + 0); triangles.Add(index + 1); triangles.Add(index + 4);
+        triangles.Add(index + 1); triangles.Add(index + 2); triangles.Add(index + 4);
+        triangles.Add(index + 2); triangles.Add(index + 3); triangles.Add(index + 4);
+        triangles.Add(index + 3); triangles.Add(index + 0); triangles.Add(index + 4);
 
         // Register quad in spatial hash
-        Vector3 center = (v0 + v1 + v2 + v3) / 4f;
-        spatialHash.AddQuad(center, index, index + 1, index + 2, index + 3);
+        spatialHash.AddQuad(v4, index, index + 1, index + 2, index + 3, index + 4);
 
         UpdateMesh();
     }

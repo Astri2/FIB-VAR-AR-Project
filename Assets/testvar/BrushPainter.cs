@@ -31,16 +31,9 @@ public class BrushPainter : MonoBehaviour
         {
             Vector3 pos = hit.point;
 
-            // Vérifie la distance pour éviter la sur-paint super dense
-            
-            if (true || Utils.MaxDistance(pos, lastPaintPos) > (brushSize * 0.5f))
-            {
-                bool placedAQuad;
-                if (eraseMode) placedAQuad = paintSystem.Erase(pos, hit.normal, brushSize * eraseSizeMultiplier);
-                else placedAQuad = paintSystem.Paint(pos, hit.normal, brushColor, brushSize);
-                
-                if(placedAQuad) lastPaintPos = pos;
-            }
+            bool placedAQuad;
+            if (eraseMode) placedAQuad = paintSystem.Erase(pos, hit.normal, brushSize * eraseSizeMultiplier);
+            else placedAQuad = paintSystem.Paint(pos, hit.normal, brushColor, brushSize);  
         }
     }
 
