@@ -9,12 +9,18 @@ public class BrushPainter : MonoBehaviour
     public bool eraseMode = false;
     public float eraseSizeMultiplier = 2f;
 
-    private Vector3 lastPaintPos;
     private Vector3 prevBrushPos;
+
+    private static readonly int ColorProp = Shader.PropertyToID("_Color");
+    public Material colorPreviewMat;
+    public Material eraserMat;
+
+    public MeshRenderer colorPreviewRenderer;
 
     public void Awake()
     {
         prevBrushPos = transform.position;
+        SetBrushColor(brushColor);
     }
 
     public void OnTriggerStay(Collider other)
@@ -31,13 +37,26 @@ public class BrushPainter : MonoBehaviour
         {
             Vector3 pos = hit.point;
 
-            bool placedAQuad;
-            if (eraseMode) placedAQuad = paintSystem.Erase(pos, hit.normal, brushSize * eraseSizeMultiplier);
-            else placedAQuad = paintSystem.Paint(pos, hit.normal, brushColor, brushSize);  
+            if (eraseMode) paintSystem.Erase(pos, hit.normal, brushSize * eraseSizeMultiplier);
+            else paintSystem.Paint(pos, hit.normal, brushColor, brushSize);  
         }
     }
 
-    public void SetBrushColor(Color c) => brushColor = c;
+    public void SetBrushColor(Color c)
+    {
+        brushColor = c;
+        colorPreviewMat.SetColor(ColorProp, c);
+    }
     public void SetBrushSize(float s) => brushSize = s;
-    public void SetErase(bool enabled) => eraseMode = enabled;
+    public void SetErase(bool enabled)
+    {
+        if(!enabled && eraseMode)
+        {
+            colorPreviewRenderer.material = colorPreviewMat;
+        } else if(enabled && !eraseMode)
+        {
+            colorPreviewRenderer.material = eraserMat;
+        }
+        eraseMode = enabled;
+    }
 }

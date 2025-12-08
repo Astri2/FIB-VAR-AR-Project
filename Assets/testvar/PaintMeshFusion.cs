@@ -42,8 +42,11 @@ public class PaintMeshFusion : MonoBehaviour
 
             foreach (int verticeIndice in quad.indices)
             {
-                // too far
-                if (Utils.ManhattanDistance(vertices[verticeIndice], position) > size / 2.0f) continue;
+                // too far ;
+                if (Utils.ManhattanDistance(
+                        Vector3.ProjectOnPlane(vertices[verticeIndice], normal),
+                        Vector3.ProjectOnPlane(position, normal)
+                    ) > size / 2.0f) continue;
                 
                 // same color
                 if (colors[verticeIndice] == color) continue;
