@@ -1,7 +1,7 @@
 using System.Net.Sockets;
 using Meta.WitAi;
 using UnityEngine;
-using UnityEngine.Rendering;
+
 
 public class BrushPainter : MonoBehaviour
 {
@@ -11,6 +11,8 @@ public class BrushPainter : MonoBehaviour
     public Color brushColor = Color.red;
     public bool eraseMode = false;
     public float eraseSizeMultiplier = 2f;
+
+    public GameObject kub;
 
     private Vector3 prevBrushPos;
 
@@ -26,46 +28,63 @@ public class BrushPainter : MonoBehaviour
         SetBrushColor(brushColor);
     }
 
-    public void OnTriggerStay(Collider other)
+    public void Update()
     {
-        if (!paintSystem)
+        if(paintSystem == null)
         {
             paintSystem = GameObject.Find("PaintSystem")?.GetComponent<PaintMeshFusion>();
-            if (!paintSystem) return;
+            if (paintSystem == null) return;
         }
 
-        if ((prevBrushPos - transform.position).magnitude < 0.01f * brushSize) return;
-        prevBrushPos = transform.position;
-
-        if (other.gameObject.CompareTag("OVR"))
+        //if(other.Raycast(ray, out RaycastHit hit, 1.0f))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 200f, worldMeshMask))
         {
-            if ((prevBrushPos - transform.position).magnitude < 0.01f * brushSize) return;
-            prevBrushPos = transform.position;
+            // Instantiate(kub);
 
-            // Ray depuis le pinceau vers l’avant
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 2f, worldMeshMask))
+            PaintingCanvas paintingCanvas = hit.collider.gameObject.GetComponent<PaintingCanvas>();
+            if (paintingCanvas != null)
             {
-                Vector3 pos = hit.point;
+                //Debug.Log("Hit canvas");
+                MeshCollider meshCollider = hit.collider.gameObject.GetComponent<MeshCollider>();
 
-                if (eraseMode) paintSystem.Erase(pos, hit.normal, brushSize * eraseSizeMultiplier);
-                else paintSystem.Paint(pos, hit.normal, brushColor, brushSize);
-            }
-        }
-
-
-        PaintingCanvas paintingCanvas = other.gameObject.GetComponent<PaintingCanvas>();
-        if (paintingCanvas != null)
-        {
-            MeshCollider meshCollider = other.gameObject.GetComponent<MeshCollider>();
-
-            // Ray from the brush center toward the surface
-            Ray ray = new Ray(transform.position, transform.forward);
-            
-            if (meshCollider.Raycast(ray, out RaycastHit hit, 1.0f))
-            {
                 Vector2 uv = hit.textureCoord;
-                paintingCanvas.Paint(uv);
+                if (eraseMode) paintingCanvas.Paint(uv, new Color(1f, 1f, 1f, 1f));
+                else paintingCanvas.Paint(uv, brushColor);
+                
+                return;
             }
+
+            ColorPicker colorPicker = hit.collider.gameObject.GetComponent<ColorPicker>();
+            if(colorPicker != null)
+            {
+                SetBrushColor(colorPicker.getColor(hit.point));
+                SetErase(false);
+            }
+
+            EraserPicker eraserPicker = hit.collider.gameObject.GetComponent<EraserPicker>();
+            if(eraserPicker != null)
+            {
+                SetErase(true);
+            }
+
+
+            if (hit.collider.gameObject.CompareTag("newOVR"))
+            {
+                //   Debug.Log("Hit virtual wall");
+
+                Debug.Log("hit name:" + hit.collider.gameObject.name + 
+                " hit layer " + LayerMask.LayerToName(hit.collider.gameObject.layer) + 
+                " pos " + hit.point +
+                " nor " + hit.normal +
+                " this " + this.transform.position
+                );
+
+                if (eraseMode) paintSystem.Erase(hit.point, hit.normal, brushSize * eraseSizeMultiplier);
+                else paintSystem.Paint(hit.point, hit.normal, brushColor, brushSize);
+
+            }
+
+
         }
     }
 

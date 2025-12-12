@@ -14,7 +14,7 @@ public class PaintMeshFusion : MonoBehaviour
     private SpatialHashQuads spatialHash;
     public float spatialHashCellSize = 0.1f;
 
-    public bool replaceColors = true;
+    public bool replaceColors = false;
 
     public void Awake()
     {

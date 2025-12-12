@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class PaintingCanvas : MonoBehaviour
 {
-    public Camera cam;           // Ta caméra principale
+    //public Camera cam;           // Ta caméra principale
     public Color paintColor = Color.red;
     public int brushSize = 10;
+    public GameObject brush;
 
     private Texture2D tex;
     private Renderer rend;
 
     void Start()
     {
-        if (cam == null) cam = Camera.main;
+        //if (cam == null) cam = Camera.main;
 
         rend = GetComponent<Renderer>();
 
@@ -24,24 +25,31 @@ public class PaintingCanvas : MonoBehaviour
 
         // Assigne la texture au matériau
         rend.material.mainTexture = tex;
+
+        int roomLayerCount = CountObjectsOnLayer(LayerMask.NameToLayer("Water"));
+        Debug.LogWarning("Found " + roomLayerCount + " objects on room layer");
+
     }
     public void Update()
     {
+        // TODO: remove
         if (Input.GetMouseButton(0))
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            //Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            Ray ray = new Ray(brush.transform.position, brush.transform.forward);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
+                //Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.gameObject == gameObject)
                 {
                     Vector2 uv = hit.textureCoord;
-                    Paint(uv);
+                    Paint(uv, paintColor);
                 }
             }
         }
     }
 
-    public void Paint(Vector2 uv)
+    public void Paint(Vector2 uv, Color paintColor)
     {
         int x = (int)(uv.x * tex.width);
         int y = (int)(uv.y * tex.height);
@@ -51,5 +59,19 @@ public class PaintingCanvas : MonoBehaviour
             for (int j = -brushSize; j < brushSize; j++)
                 tex.SetPixel(x + i, y + j, paintColor);
         tex.Apply();
+    }
+
+    int CountObjectsOnLayer(int layer)
+    {
+        GameObject[] allObjects = FindObjectsOfType<GameObject>(true); // include inactive
+        int count = 0;
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.layer == layer)
+                count++;
+        }
+
+        return count;
     }
 }

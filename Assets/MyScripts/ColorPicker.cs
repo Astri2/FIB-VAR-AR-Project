@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ColorPicker : MonoBehaviour
 {
-    private Color getColor(Vector3 hitPosition)
+    public Color getColor(Vector3 hitPosition)
     {
         Vector3 localHitPosition = transform.InverseTransformPoint(hitPosition);
         Vector2 hit = new Vector2(localHitPosition.x, localHitPosition.z);
@@ -42,6 +42,7 @@ public class ColorPicker : MonoBehaviour
         return new Color(r, g, b, 1.0f);
     }
 
+    /*
     public void OnTriggerStay(Collider other)
     {
         BrushPainter brush = other.GetComponent<BrushPainter>();
@@ -54,4 +55,5 @@ public class ColorPicker : MonoBehaviour
             brush.eraseMode = false;
         } 
     }
+    */
 }

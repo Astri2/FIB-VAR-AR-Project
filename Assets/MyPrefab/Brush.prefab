@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 863757459355179736}
   - component: {fileID: 6968105060207246943}
   - component: {fileID: 2423220237063419565}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: '[BuildingBlock] HandGrabInstallationRoutine'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: f8766c17-aaf8-4b55-9431-de8deea83842
-  instanceId: 04bcb757-a8f9-4340-8b15-5d3522d9da63
+  instanceId: 29d39ced-c7fb-48cb-ba2a-d710a88e4530
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: f8338144-8280-4ff6-9455-ae2bb9c20fe8
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 4459314464069043845}
   - component: {fileID: 6732400065075167151}
   - component: {fileID: 1308725529393023461}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 9017071222395066732}
   - component: {fileID: 1347793933519899504}
   - component: {fileID: 4536217512749657018}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Brush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,15 +323,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6866282294623998556}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.754, y: -0.124, z: 0.108}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7354616006790892649}
   - {fileID: 2527715978440206205}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5600807454409287597
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -419,13 +419,14 @@ MonoBehaviour:
   paintSystem: {fileID: 0}
   worldMeshMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 16
   brushSize: 0.05
   brushColor: {r: 1, g: 0, b: 0, a: 1}
   eraseMode: 0
   eraseSizeMultiplier: 1
+  kub: {fileID: 7612780856930893578, guid: 850898fe293e3694aa841b79b4ca9d1e, type: 3}
   colorPreviewMat: {fileID: 2100000, guid: ff86e0eccbe44004a8c13739db180021, type: 2}
-  eraserMat: {fileID: 2100000, guid: 62066770e3d9bf44abfd5d147b8bf684, type: 2}
+  eraserMat: {fileID: 2100000, guid: 01c24ba6f2ff1e64c8d39ad1400ec1f1, type: 2}
   colorPreviewRenderer: {fileID: 5322488907210691872}
 --- !u!136 &7038949653749527034
 CapsuleCollider:
@@ -539,9 +540,9 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.13638178
-  m_Height: 0.016295515
-  m_Direction: 1
+  m_Radius: 0.02
+  m_Height: 0.3
+  m_Direction: 2
   m_Center: {x: 0.0030857115, y: -0.0006210056, z: 0.00032397368}
