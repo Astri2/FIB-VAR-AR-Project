@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - OVR
+  - BowlingPin
+  - PaintingCanva
   layers:
   - Default
   - TransparentFX

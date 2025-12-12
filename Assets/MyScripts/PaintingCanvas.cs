@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PaintingCanvas : MonoBehaviour
 {
     public Camera cam;           // Ta caméra principale
     public Color paintColor = Color.red;
@@ -11,6 +11,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Start()
     {
+        if (cam == null) cam = Camera.main;
+
         rend = GetComponent<Renderer>();
 
         // Crée une texture blanche
@@ -23,8 +25,7 @@ public class NewBehaviourScript : MonoBehaviour
         // Assigne la texture au matériau
         rend.material.mainTexture = tex;
     }
-
-    void Update()
+    public void Update()
     {
         if (Input.GetMouseButton(0))
         {
@@ -34,17 +35,21 @@ public class NewBehaviourScript : MonoBehaviour
                 if (hit.collider.gameObject == gameObject)
                 {
                     Vector2 uv = hit.textureCoord;
-                    int x = (int)(uv.x * tex.width);
-                    int y = (int)(uv.y * tex.height);
-
-                    // dessine un carré simple comme pinceau
-                    for (int i = -brushSize; i < brushSize; i++)
-                        for (int j = -brushSize; j < brushSize; j++)
-                            tex.SetPixel(x + i, y + j, paintColor);
-
-                    tex.Apply();
+                    Paint(uv);
                 }
             }
         }
+    }
+
+    public void Paint(Vector2 uv)
+    {
+        int x = (int)(uv.x * tex.width);
+        int y = (int)(uv.y * tex.height);
+
+        // dessine un carré simple comme pinceau
+        for (int i = -brushSize; i < brushSize; i++)
+            for (int j = -brushSize; j < brushSize; j++)
+                tex.SetPixel(x + i, y + j, paintColor);
+        tex.Apply();
     }
 }

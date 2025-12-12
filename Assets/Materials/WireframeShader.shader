@@ -40,7 +40,7 @@ Shader "Custom/Wireframe"
                 {
                     g2f o1, o2;
                     o1.vertex = IN[i].vertex;
-                    o2.vertex = IN[(i+1)%3].vertex;
+                    o2.vertex = IN[uint(i+1)%3].vertex;
                     lineStream.Append(o1);
                     lineStream.Append(o2);
                 }
