@@ -37,7 +37,7 @@ public class BrushPainter : MonoBehaviour
         }
 
         //if(other.Raycast(ray, out RaycastHit hit, 1.0f))
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 2f, worldMeshMask))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.1f, worldMeshMask))
         {
             // Instantiate(kub);
 
@@ -70,21 +70,9 @@ public class BrushPainter : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("newOVR"))
             {
-                //   Debug.Log("Hit virtual wall");
-
-                Debug.Log("hit name:" + hit.collider.gameObject.name + 
-                " hit layer " + LayerMask.LayerToName(hit.collider.gameObject.layer) + 
-                " pos " + hit.point +
-                " nor " + hit.normal +
-                " this " + this.transform.position
-                );
-
                 if (eraseMode) paintSystem.Erase(hit.point, hit.normal, brushSize * eraseSizeMultiplier);
                 else paintSystem.Paint(hit.point, hit.normal, brushColor, brushSize);
-
             }
-
-
         }
     }
 
