@@ -174,9 +174,9 @@ GameObject:
   - component: {fileID: 5289531453760731824}
   - component: {fileID: 4597925388892733041}
   - component: {fileID: 4478061904750387061}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: Plane Override
-  m_TagString: newOVR
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

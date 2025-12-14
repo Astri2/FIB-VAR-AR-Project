@@ -37,7 +37,7 @@ public class BrushPainter : MonoBehaviour
         }
 
         //if(other.Raycast(ray, out RaycastHit hit, 1.0f))
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 200f, worldMeshMask))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 2f, worldMeshMask))
         {
             // Instantiate(kub);
 
@@ -111,7 +111,7 @@ public class BrushPainter : MonoBehaviour
         Gizmos.color = Color.blue;
 
         Vector3 start = transform.position;
-        Vector3 dir = transform.forward.normalized;
+        Vector3 dir = transform.forward.normalized * 0.1f;
 
         Gizmos.DrawRay(start, dir);
 
