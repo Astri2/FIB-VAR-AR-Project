@@ -149,7 +149,8 @@ GameObject:
   - component: {fileID: 891340010865987082}
   - component: {fileID: 2384512430566217070}
   - component: {fileID: 5318339073941148997}
-  - component: {fileID: 3624954599598711073}
+  - component: {fileID: 3228000465754634621}
+  - component: {fileID: 4331020211726010085}
   m_Layer: 4
   m_Name: EraserPicker
   m_TagString: Untagged
@@ -166,8 +167,8 @@ Transform:
   m_GameObject: {fileID: 589732453041467244}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.015, z: 0}
-  m_LocalScale: {x: 200, y: 200, z: 200}
+  m_LocalPosition: {x: 0, y: 0.0045, z: 0}
+  m_LocalScale: {x: 60, y: 60, z: 60}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6710074121705328555}
@@ -227,8 +228,8 @@ MonoBehaviour:
   _transferOnSecondSelection: 0
   _addNewPointsToFront: 0
   _forwardElement: {fileID: 0}
-  _oneGrabTransformer: {fileID: 0}
-  _twoGrabTransformer: {fileID: 0}
+  _oneGrabTransformer: {fileID: 3228000465754634621}
+  _twoGrabTransformer: {fileID: 3228000465754634621}
   _targetTransform: {fileID: 3520397661358711933}
   _maxGrabPoints: -1
   _rigidbody: {fileID: 4903067507239261387}
@@ -308,8 +309,71 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589732453041467244}
   m_Mesh: {fileID: 973219407426403096, guid: aa814175c4755e94789e06fb3e4a5d74, type: 3}
---- !u!64 &3624954599598711073
-MeshCollider:
+--- !u!114 &3228000465754634621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589732453041467244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb7085c111fcb44493d57d4e336d3fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _positionConstraints:
+    ConstraintsAreRelative: 0
+    XAxis:
+      ConstrainAxis: 0
+      AxisRange:
+        Min: 0
+        Max: 0
+    YAxis:
+      ConstrainAxis: 0
+      AxisRange:
+        Min: 0
+        Max: 0
+    ZAxis:
+      ConstrainAxis: 0
+      AxisRange:
+        Min: 0
+        Max: 0
+  _rotationConstraints:
+    XAxis:
+      ConstrainAxis: 0
+      AxisRange:
+        Min: 0
+        Max: 0
+    YAxis:
+      ConstrainAxis: 0
+      AxisRange:
+        Min: 0
+        Max: 0
+    ZAxis:
+      ConstrainAxis: 0
+      AxisRange:
+        Min: 0
+        Max: 0
+  _scaleConstraints:
+    ConstraintsAreRelative: 1
+    XAxis:
+      ConstrainAxis: 1
+      AxisRange:
+        Min: 1
+        Max: 10
+    YAxis:
+      ConstrainAxis: 1
+      AxisRange:
+        Min: 1
+        Max: 10
+    ZAxis:
+      ConstrainAxis: 1
+      AxisRange:
+        Min: 1
+        Max: 10
+  _resetScaleResponsivenessOnConstraintOvershoot: 0
+--- !u!65 &4331020211726010085
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -326,7 +390,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 973219407426403096, guid: aa814175c4755e94789e06fb3e4a5d74, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.00029999972, y: 0.00015, z: 0.00089328736}
+  m_Center: {x: -1.5279511e-10, y: -1.0913936e-11, z: 0.000015653306}

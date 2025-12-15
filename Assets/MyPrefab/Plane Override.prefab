@@ -173,7 +173,6 @@ GameObject:
   - component: {fileID: 4949278953804303021}
   - component: {fileID: 5289531453760731824}
   - component: {fileID: 4597925388892733041}
-  - component: {fileID: 4478061904750387061}
   m_Layer: 0
   m_Name: Plane Override
   m_TagString: Untagged
@@ -272,19 +271,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4478061904750387061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3891924591772027728}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50880276867ef7b47a3e5d3cd1f7b0cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kub: {fileID: 7612780856930893578, guid: 850898fe293e3694aa841b79b4ca9d1e, type: 3}
 --- !u!1 &5500320844421205994
 GameObject:
   m_ObjectHideFlags: 0

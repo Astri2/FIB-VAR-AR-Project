@@ -18876,6 +18876,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8020840329537314013, guid: 55d9e0f8bb970d847bbf2c426d3c5060, type: 3}
+      propertyPath: _transferOnSecondSelection
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22538,11 +22542,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1490550284}
   - component: {fileID: 1490550283}
-  - component: {fileID: 1490550282}
   - component: {fileID: 1490550285}
   - component: {fileID: 1490550288}
   - component: {fileID: 1490550287}
   - component: {fileID: 1490550286}
+  - component: {fileID: 1490550289}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -22550,30 +22554,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1490550282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490550281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d14e43228043c04db9e374568cb89a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnOnStart: 1
-  SpawnObject: {fileID: 6866282294623998556, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
-  SpawnAmount: 10
-  MaxIterations: 1000
-  SpawnLocations: 3
-  Labels: 8
-  CheckOverlaps: 1
-  OverrideBounds: -1
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  SurfaceClearanceDistance: 0.1
 --- !u!114 &1490550283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22621,7 +22601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnOnStart: 1
   SpawnObject: {fileID: 4207514949652641388, guid: e587b7d53accd954f9b538754a956c1c, type: 3}
-  SpawnAmount: 8
+  SpawnAmount: 4
   MaxIterations: 1000
   SpawnLocations: 3
   Labels: 1
@@ -22692,11 +22672,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnOnStart: 1
-  SpawnObject: {fileID: 3492653410846006891, guid: 78b6ad42b449c7c4d9a41868fb5caa96, type: 3}
+  SpawnObject: {fileID: 7849903807142256222, guid: 0fe2341dd22975943b60213bcab032cd, type: 3}
   SpawnAmount: 8
   MaxIterations: 1000
   SpawnLocations: 3
   Labels: 1
+  CheckOverlaps: 1
+  OverrideBounds: -1
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  SurfaceClearanceDistance: 0.1
+--- !u!114 &1490550289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490550281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d14e43228043c04db9e374568cb89a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnOnStart: 1
+  SpawnObject: {fileID: 6866282294623998556, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
+  SpawnAmount: 5
+  MaxIterations: 1000
+  SpawnLocations: 3
+  Labels: 8
   CheckOverlaps: 1
   OverrideBounds: -1
   LayerMask:
@@ -22888,16 +22892,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 947700177703614278, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 947700177703614278, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 947700177703614278, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 947700177703614278, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.792
       objectReference: {fileID: 0}
     - target: {fileID: 947700177703614278, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.706
+      value: 1.367
       objectReference: {fileID: 0}
     - target: {fileID: 947700177703614278, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.748
+      value: 0.336
       objectReference: {fileID: 0}
     - target: {fileID: 947700177703614278, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22941,7 +22957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6866282294623998556, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7549605674277366945, guid: 94ca5dd76c3122940aa27b88d7c069ad, type: 3}
       propertyPath: paintSystem

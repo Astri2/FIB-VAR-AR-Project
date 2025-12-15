@@ -25,6 +25,8 @@ public class BrushPainter : MonoBehaviour
     public void Awake()
     {
         prevBrushPos = transform.position;
+        colorPreviewMat = new Material(colorPreviewMat);
+        colorPreviewRenderer.material = colorPreviewMat;
         SetBrushColor(brushColor);
     }
 
@@ -37,7 +39,7 @@ public class BrushPainter : MonoBehaviour
         }
 
         //if(other.Raycast(ray, out RaycastHit hit, 1.0f))
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.1f, worldMeshMask))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.2f, worldMeshMask))
         {
             // Instantiate(kub);
 
@@ -99,7 +101,7 @@ public class BrushPainter : MonoBehaviour
         Gizmos.color = Color.blue;
 
         Vector3 start = transform.position;
-        Vector3 dir = transform.forward.normalized * 0.1f;
+        Vector3 dir = transform.forward.normalized * 0.2f;
 
         Gizmos.DrawRay(start, dir);
 

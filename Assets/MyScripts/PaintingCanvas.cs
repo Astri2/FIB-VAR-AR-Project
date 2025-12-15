@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PaintingCanvas : MonoBehaviour
 {
-    public int brushSize = 10;
+    private int brushSize = 15;
 
     private Texture2D tex;
     private Renderer rend;
@@ -23,8 +23,8 @@ public class PaintingCanvas : MonoBehaviour
         int y = (int)(uv.y * tex.height);
 
         // draw a simple square
-        for (int i = -brushSize; i < brushSize; i++)
-            for (int j = -brushSize; j < brushSize; j++)
+        for (int i = -brushSize; i <= brushSize; i++)
+            for (int j = -brushSize; j <= brushSize; j++)
                 tex.SetPixel(x + i, y + j, paintColor);
         tex.Apply();
     }

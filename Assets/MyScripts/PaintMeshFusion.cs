@@ -12,7 +12,7 @@ public class PaintMeshFusion : MonoBehaviour
     public List<int> triangles = new List<int>();
 
     private SpatialHashQuads spatialHash;
-    public float spatialHashCellSize = 0.1f;
+    public float spatialHashCellSize = 0.08f;
 
     public bool replaceColors = false;
 
@@ -68,7 +68,7 @@ public class PaintMeshFusion : MonoBehaviour
         // If no nearby vertices, add a new quad
         if (needANewQuad && !erase)
         {
-            Debug.Log("Added a quad");
+            // Debug.Log("Added a quad");
             AddQuad(position, normal, color, size);
         } else if(changedAColor)
         {
@@ -76,7 +76,7 @@ public class PaintMeshFusion : MonoBehaviour
             paintMesh.SetColors(colors);
         }
 
-        if(changedAColor) Debug.Log("Changed a color");
+        if (changedAColor) ; // Debug.Log("Changed a color");
 
         return true; // unused for now
     }
