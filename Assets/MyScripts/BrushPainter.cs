@@ -12,10 +12,6 @@ public class BrushPainter : MonoBehaviour
     public bool eraseMode = false;
     public float eraseSizeMultiplier = 2f;
 
-    public GameObject kub;
-
-    private Vector3 prevBrushPos;
-
     private static readonly int ColorProp = Shader.PropertyToID("_Color");
     public Material colorPreviewMat;
     public Material eraserMat;
@@ -24,7 +20,6 @@ public class BrushPainter : MonoBehaviour
 
     public void Awake()
     {
-        prevBrushPos = transform.position;
         colorPreviewMat = new Material(colorPreviewMat);
         colorPreviewRenderer.material = colorPreviewMat;
         SetBrushColor(brushColor);
@@ -38,15 +33,12 @@ public class BrushPainter : MonoBehaviour
             if (paintSystem == null) return;
         }
 
-        //if(other.Raycast(ray, out RaycastHit hit, 1.0f))
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.2f, worldMeshMask))
         {
-            // Instantiate(kub);
-
+            
             PaintingCanvas paintingCanvas = hit.collider.gameObject.GetComponent<PaintingCanvas>();
             if (paintingCanvas != null)
             {
-                //Debug.Log("Hit canvas");
                 MeshCollider meshCollider = hit.collider.gameObject.GetComponent<MeshCollider>();
 
                 Vector2 uv = hit.textureCoord;

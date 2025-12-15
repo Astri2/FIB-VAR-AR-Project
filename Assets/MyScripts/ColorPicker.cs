@@ -8,8 +8,7 @@ public class ColorPicker : MonoBehaviour
         Vector3 localHitPosition = transform.InverseTransformPoint(hitPosition);
         Vector2 hit = new Vector2(localHitPosition.x, localHitPosition.z);
 
-        // Debug.Log(hit.x.ToString() + " " + hit.y.ToString());
-
+       
         float v = 1.0f;
         float s = Mathf.Min(hit.magnitude / 0.5f, 1f); // outside ring of the circle is at 0.5 of center
 
@@ -42,18 +41,4 @@ public class ColorPicker : MonoBehaviour
         return new Color(r, g, b, 1.0f);
     }
 
-    /*
-    public void OnTriggerStay(Collider other)
-    {
-        BrushPainter brush = other.GetComponent<BrushPainter>();
-        if (brush == null) return;
-
-        if (Physics.Raycast(other.transform.position, other.transform.forward, out RaycastHit hit, 2f, ~0))
-        {
-            Vector3 pos = hit.point;
-            brush.SetBrushColor(getColor(pos));
-            brush.eraseMode = false;
-        } 
-    }
-    */
 }

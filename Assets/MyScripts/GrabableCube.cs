@@ -1,3 +1,6 @@
+
+// Unused script
+
 using UnityEngine;
 using System.Collections;
 using Oculus.Interaction;

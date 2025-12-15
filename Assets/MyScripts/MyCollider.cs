@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿
+// Unused script
+
+using UnityEngine;
 
 public class MyCollider : MonoBehaviour
 {
